@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+
+{% block title %}Search Results - Festival Film Finder{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1>Showing Results for "{{ search_term }}"</h1>
+
+        {% if results %}
+            <div class="row">
+                {% for film in results %}
+                    <div class="col-md-4">
+                        <div class="card">
+                            <a href="/view/{{ film.id }}">
+                                <img src="{{ film.poster }}" class="card-img-top" alt="{{ film.title }}" 
+                                    onerror="this.onerror=null; this.src='https://via.placeholder.com/300x450';">
+                            </a>
+                            <div class="card-body">
+                                <h5 class="card-title">{{ film.title }} ({{ film.year }})</h5>
+                                <p class="card-text">{{ film.summary[:100] }}...</p>
+                                <a href="/view/{{ film.id }}" class="btn btn-primary">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p>No results found.</p>
+        {% endif %}
+    </div>
+{% endblock %}
