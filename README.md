@@ -1,11 +1,11 @@
 # 🎬 Festival Film Finder - Flask Web App  
 
-📌 **Live Demo on Render**: [Festival Film Finder](https://your-render-url.onrender.com/)  
+📌 **Live Demo on Render**: [Festival Film Finder](https://festival-film-finder.onrender.com/)  
 
 ---
 
 ## 🔗 GitHub Repository  
-🚀 **View Source Code:** [GitHub Repo](https://github.com/your-username/festival-film-finder)  
+🚀 **View Source Code:** [GitHub Repo](https://github.com/minyoungkim525-dev/festival-film-finder)  
 
 ---
 
@@ -18,19 +18,6 @@
 
 ---
 
-## 📷 Screenshots  
-![Festival Film Finder Screenshot](screenshot.png)  
-
----
-
-## 🎥 Demo Video  
-📌 **Click the screenshot below to watch the demo:**  
-
-[![Watch the Demo](screenshot.png)](https://youtu.be/your-demo-video-url)  
-
-🔗 **[Click here to watch the demo](https://youtu.be/your-demo-video-url)**  
-
----
 
 ## 🛠 Technologies Used  
 - **Python** 🐍 (Flask)  
