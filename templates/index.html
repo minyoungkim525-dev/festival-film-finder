@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+
+{% block title %}Home - Festival Film Finder{% endblock %}
+
+{% block content %}
+<div class="container">
+    <!-- Hero Section -->
+    <div class="text-center my-5">
+        <h1 class="display-4">Festival Film Finder</h1>
+        <p class="lead">Discover award-winning films from major international festivals</p>
+    </div>
+
+    <!-- Featured Films -->
+    <h2 class="mb-4">Top 3 Awarded Films of 2024</h2>
+    <div id="popular-films" class="row">
+        {% for entry in featured_data %}
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 shadow-lg rounded-4 border-0">
+                <!-- Clickable Poster -->
+                <a href="{{ url_for('view_data', id=entry.id) }}" class="d-block">
+                    <img src="{{ entry.poster }}" class="card-img-top img-fluid rounded-top" 
+                         alt="{{ entry.title }}" style="width: 100%; height: auto;">
+                </a>
+                <div class="card-body text-center">
+                    <h4 class="card-title mt-2 mb-4">{{ entry.title }}</h4>
+                    <p class="card-text"><strong>Director:</strong> {{ entry.director | join(", ") }}</p>
+                    <p class="card-text"><strong>Genres:</strong> {{ entry.genres | join(", ") }}</p>
+                    <p class="card-text"><strong>Year:</strong> {{ entry.year }}</p>
+                    <p class="card-text"><strong>Rating:</strong> {{ entry.rating }}%</p>
+                </div>
+                <div class="card-footer text-center border-0 bg-white">
+                    <a href="{{ url_for('view_data', id=entry.id) }}" class="btn btn-primary rounded-pill px-4 mb-3">View Details</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

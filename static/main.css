@@ -1,0 +1,32 @@
+.card {
+    display: flex;
+    flex-direction: column;
+    height: 100%; /* Makes all cards the same height */
+}
+
+.card-body {
+    flex-grow: 1; /* Ensures the text section expands equally */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Pushes the button to the bottom */
+}
+
+.card-text {
+    flex-grow: 1; /* Allows text to take up equal space */
+}
+
+.card img {
+    height: 300px; /* Ensures all images are the same height */
+    object-fit: cover; /* Prevents distortion while maintaining aspect ratio */
+}
+
+.card p {
+    margin-bottom: 12px; /* Adjust the spacing */
+}
+
+.highlight {
+    background-color: #fff3b0; /* Light yellow highlight */
+    padding: 2px;
+    border-radius: 3px;
+}
+

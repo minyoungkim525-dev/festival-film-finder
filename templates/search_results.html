@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+
+{% block title %}Search Results{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1>Showing Results for "{{ search_term }}"</h1>
+    <p>{{ results|length }} result(s) found.</p>
+
+    {% if results %}
+    <div class="row">
+        {% for entry in results %}
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 shadow-lg rounded-4 border-0">
+                <!-- Clickable Poster -->
+                <a href="{{ url_for('view_data', id=entry.id) }}" class="d-block">
+                    <img src="{{ entry.poster }}" class="card-img-top img-fluid rounded-top"
+                         style="object-fit: contain; width: 100%; height: auto; border-top-left-radius: 16px; border-top-right-radius: 16px;">
+                </a>
+                <div class="card-body text-center">
+                    <h5 class="card-title mt-3 mb-4">{{ entry.title | safe }}</h5> 
+                    <p class="card-text"><strong>Director:</strong> {{ entry.director | join(", ") | safe }}</p>
+                    <p class="card-text"><strong>Stars:</strong> {{ entry.stars | join(", ") | safe }}</p>
+                    <p class="card-text"><strong>Genres:</strong> {{ entry.genres | join(", ") | safe }}</p>
+                </div>
+                <div class="card-footer text-center border-0 bg-white">
+                    <a href="{{ url_for('view_data', id=entry.id) }}" class="btn btn-primary rounded-pill px-4 mb-3">View Details</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <p class="text-muted">No matches found.</p>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,101 @@
+{% extends "layout.html" %}
+
+{% block title %}Add Film - Festival Film Finder{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2 class="my-4">Add a New Film</h2>
+
+    <!-- Success Message -->
+    <div id="success-message" class="alert alert-success d-none">
+        <!-- <strong>Success!</strong> New film added. -->
+        New item successfully created
+        <a id="view-film-link" href="#" class="alert-link">See it here</a>.
+    </div>
+
+    <!-- Form -->
+    <form id="add-film-form">
+        <div class="mb-3">
+            <label for="title" class="form-label">Film Title</label>
+            <input type="text" class="form-control" id="title" name="title">
+            <div class="invalid-feedback"></div>
+        </div>
+
+        <div class="mb-3">
+            <label for="year" class="form-label">Year</label>
+            <input type="text" class="form-control" id="year" name="year">
+            <div class="invalid-feedback"></div>
+        </div>
+
+        <div class="mb-3">
+            <label for="rating" class="form-label">Rating (0-100%)</label>
+            <input type="text" class="form-control" id="rating" name="rating">
+            <div class="invalid-feedback"></div>
+        </div>
+
+        <div class="mb-3">
+            <label for="running_time" class="form-label">Running Time (minutes)</label>
+            <input type="text" class="form-control" id="running_time" name="running_time">
+            <div class="invalid-feedback"></div>
+        </div>
+
+        <div class="mb-3">
+            <label for="director" class="form-label">Director(s) (comma-separated)</label>
+            <input type="text" class="form-control" id="director" name="director">
+            <div class="invalid-feedback"></div>
+        </div>
+
+        <div class="mb-3">
+            <label for="genres" class="form-label">Genres (comma-separated)</label>
+            <input type="text" class="form-control" id="genres" name="genres">
+            <div class="invalid-feedback"></div>
+        </div>
+
+        <div class="mb-3">
+            <label for="poster" class="form-label">Poster URL</label>
+            <input type="text" class="form-control" id="poster" name="poster">
+            <div class="invalid-feedback"></div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Add Film</button>
+    </form>
+</div>
+
+<!-- Client-Side Validation & AJAX -->
+<script>
+document.getElementById("add-film-form").addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    let formData = new FormData(this);
+    let valid = true;
+
+    // Reset validation feedback
+    document.querySelectorAll(".form-control").forEach(input => {
+        input.classList.remove("is-invalid");
+        input.nextElementSibling.textContent = "";
+    });
+
+    // Send data via AJAX
+    fetch("{{ url_for('add_data') }}", {
+        method: "POST",
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            document.getElementById("success-message").classList.remove("d-none");
+            document.getElementById("view-film-link").href = "/view/" + data.id;
+            document.getElementById("add-film-form").reset();
+        } else {
+            // Display error messages
+            Object.keys(data.errors).forEach(field => {
+                let input = document.getElementById(field);
+                input.classList.add("is-invalid");
+                input.nextElementSibling.textContent = data.errors[field];
+            });
+        }
+    })
+    .catch(error => console.error("Error:", error));
+});
+</script>
+{% endblock %}

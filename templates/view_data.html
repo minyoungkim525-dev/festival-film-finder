@@ -1,0 +1,89 @@
+{% extends "layout.html" %}
+
+{% block title %}{{ data.title }} - Details{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <!-- Left Column: Centered Title & Poster with Background -->
+        <div class="col-6 text-center p-4 rounded-4" style="background-color: #fbf8ef;">
+            <h1 class="mb-3">
+                {{ data.title }} 
+                <small class="fw-normal" style="font-size: 0.8em; color: #6c757d;">({{ data.year }})</small>
+            </h1>
+            <img src="{{ data.poster }}" class="img-fluid rounded" alt="{{ data.title }}" 
+                 style="width: 66%; height: auto;">
+
+            <!-- Festival Wins Box -->
+            <div class="mt-5 mx-auto p-3 rounded-4 shadow-sm" 
+                 style="background-color: white; border-radius: 20px; width: 80%;">
+                <ul class="mb-0 list-unstyled">
+                    {% for award in data.festival_wins %}
+                    <li>{{ award }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+
+        <!-- Right Column: Film Details -->
+        <div class="col-6 p-4">
+            <div class="mb-4">
+                <span class="px-5 py-3 d-inline-block text-center" 
+                      style="background-color: #ffcc00; font-size: 1.8rem; font-weight: bold; color: #333; 
+                             border-radius: 30px;">
+                    ⭐ {{ data.rating }}%
+                </span>
+            </div>
+
+            <p class="text-muted mb-4" style="font-size: 0.95rem;">{{ data.summary }}</p>
+
+            <p><strong>Director:</strong> {{ ", ".join(data.director) }}</p>
+            <p><strong>Stars:</strong> {{ ", ".join(data.stars) }}</p>
+            <p><strong>Genres:</strong> {{ ", ".join(data.genres) }}</p>
+            <p><strong>Running Time:</strong> {{ data.running_time }} min</p>
+
+            <p class="mt-4"><strong>Language:</strong> {{ ", ".join(data.languages) }}</p>
+
+            <div style="margin-bottom: 40px;"></div>
+
+            <div>
+                <a href="{{ data.trailer }}" class="btn text-white px-5 py-3 fw-bold"
+                   style="background-color: #80cbc4ff; font-size: 1.2rem; border-radius: 30px; margin-top: 30px;" 
+                   target="_blank">
+                    🎬 Trailer
+                </a>
+            </div>
+
+            <!-- "Where to Watch"  -->
+            <p class="mt-3"><strong>Where to Watch:</strong> {{ ", ".join(data.where_to_watch) }}</p>
+
+            <!-- Similar Movies Section  -->
+            {% if data.similar_movie_ids and data.similar_movie_ids|length > 0 %}
+            <div class="mt-4">
+                <h4 class="mb-3">Similar Movies</h4>
+                <div class="row">
+                    {% for similar_id in data.similar_movie_ids %}
+                    {% if similar_id in all_movies %}
+                    {% set similar = all_movies[similar_id] %}
+                    <div class="col-4 text-center">
+                        <a href="{{ url_for('view_data', id=similar.id) }}" class="d-block">
+                            <img src="{{ similar.poster }}" class="img-fluid rounded mb-2"
+                                 alt="{{ similar.title }}" style="width: 100%; height: auto;">
+                        </a>
+                        <p class="fw-bold">{{ similar.title }}</p>
+                    </div>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+
+            <div class="mt-3">
+                <a href="{{ url_for('edit_data', id=data.id) }}" class="btn btn-outline-secondary btn-sm">
+                    Edit Film
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
