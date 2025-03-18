@@ -10,7 +10,10 @@
 ---
 
 ## 🚀 Features  
-- 🎥 **Search Award-Winning Films** from **Oscars, Cannes, and Berlin Film Festival**  
+- 🎥 **Search Award-Winning Films** from **Oscars, Cannes, and Berlin Film Festival**
+- 🔍 Search & Discovery
+✔ Full-text search across title, director, genre, and stars (supports multi-word queries)
+✔ Highlighted matching text for easier scanning
 - 🔍 **Filter Films by Title**  
 - 📑 **View Film Details** including **director, cast, genres, and where to watch**  
 - 🎬 **Watch Trailers** with direct YouTube links  
